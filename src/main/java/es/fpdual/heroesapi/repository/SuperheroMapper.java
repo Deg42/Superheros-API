@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import es.fpdual.heroesapi.model.SuperheroBean;
 
-public class SuperheroeMapper implements RowMapper<SuperheroBean> {
+public class SuperheroMapper implements RowMapper<SuperheroBean> {
 
 	@Override
 	public SuperheroBean mapRow(ResultSet rs, int rowNum) throws SQLException {

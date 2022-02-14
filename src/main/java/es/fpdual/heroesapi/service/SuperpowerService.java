@@ -6,14 +6,10 @@ import es.fpdual.heroesapi.model.SuperpowerBean;
 
 public interface SuperpowerService {
 
-	List<SuperpowerBean> selectAll();
-
-	SuperpowerBean selectById(long id);
-
-	void insert(SuperpowerBean superpower);
-
-	void update(SuperpowerBean superpower);
-
-	void delete(long id);
+	List<SuperpowerBean> selectAll(long idHero);
+	
+	void insert(long idHero, List<SuperpowerBean> superpowers);
+	
+	void delete(long idHero);
 
 }

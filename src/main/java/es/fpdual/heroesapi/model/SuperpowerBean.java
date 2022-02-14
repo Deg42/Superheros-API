@@ -10,10 +10,4 @@ public class SuperpowerBean {
 	private long id;
 	private String power;
 	
-	public SuperpowerBean(long id, String power) {
-		super();
-		this.id = id;
-		this.power = power;
-	}
-
 }

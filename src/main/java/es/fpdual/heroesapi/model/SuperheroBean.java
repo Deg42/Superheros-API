@@ -15,12 +15,4 @@ public class SuperheroBean {
 	private String image;
 	private List<SuperpowerBean> superpowers;
 
-	public SuperheroBean(long id, String name, String alterego, String image, List<SuperpowerBean> superpowers) {
-		this.id = id;
-		this.name = name;
-		this.alterego = alterego;
-		this.image = image;
-		this.superpowers = superpowers;
-	}
-
 }

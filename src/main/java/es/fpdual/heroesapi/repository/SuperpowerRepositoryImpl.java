@@ -15,9 +15,12 @@ public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 	private JdbcTemplate template;
 
 	@Override
-	public List<SuperpowerBean> selectAll() {
+	public List<SuperpowerBean> selectAll(long idHero) {
 		try {
-			return this.template.query("SELECT * FROM SUPERPOWERS", new SuperpowerMapper());
+			return this.template.query("SELECT ID, POWER FROM SUPERPOWERS S "
+					+ "INNER JOIN HERO_HAS_POW HP ON S.ID = HP.ID_POW" 
+					+ "WHERE HP.ID_HERO = ?", 
+					new SuperpowerMapper(), idHero);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -25,9 +28,11 @@ public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 	}
 
 	@Override
-	public SuperpowerBean selectById(long id) {
+	public void insert(long idHero, List<SuperpowerBean> superpowers) {
 		try {
-			return this.template.queryForObject("SELECT * FROM SUPERPOWERS WHERE ID = ?", new SuperpowerMapper(), id);
+			superpowers.stream().forEach(superopower -> {
+				this.template.update("INSERT INTO HERO_HAS_POW VALUES (?, ?)", idHero, superopower.getId());
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -35,33 +40,9 @@ public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 	}
 
 	@Override
-	public void insert(SuperpowerBean superpower) {
-			try {
-			this.template.update("INSERT INTO SUPERPOWERS VALUES (?, ?)", 
-					superpower.getId(), 
-					superpower.getPower());		
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-	}
-
-	@Override
-	public void update(SuperpowerBean superpower) {		
+	public void delete(long idHero) {
 		try {
-			this.template.update("UPDATE SUPERPOWERS SET POWER = ? WHERE ID = ?",
-					superpower.getPower(),
-					superpower.getId());
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-	}
-
-	@Override
-	public void delete(long id) {		
-		try {
-			this.template.update("DELETE FROM SUPERPOWERS WHERE ID = ?", id);
+			this.template.update("DELETE FROM HERO_HAS_POW WHERE ID_HERO = ?", idHero);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

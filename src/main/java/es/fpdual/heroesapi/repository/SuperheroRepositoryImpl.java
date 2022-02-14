@@ -17,7 +17,7 @@ public class SuperheroRepositoryImpl implements SuperheroRepository {
 	@Override
 	public List<SuperheroBean> selectAll() {
 		try {
-			return this.template.query("SELECT * FROM HEROES", new SuperheroeMapper());
+			return this.template.query("SELECT * FROM HEROES", new SuperheroMapper());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -27,7 +27,7 @@ public class SuperheroRepositoryImpl implements SuperheroRepository {
 	@Override
 	public SuperheroBean selectById(long id) {
 		try {
-			return this.template.queryForObject("SELECT * FROM HEROES WHERE ID = ?", new SuperheroeMapper(), id);
+			return this.template.queryForObject("SELECT * FROM HEROES WHERE ID = ?", new SuperheroMapper(), id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
