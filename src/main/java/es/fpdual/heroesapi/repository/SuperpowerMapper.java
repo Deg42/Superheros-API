@@ -19,4 +19,6 @@ public class SuperpowerMapper implements RowMapper<SuperpowerBean> {
 		return superpower;
 	}
 
+	
+
 }

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class SuperpowerBean {
-	
+
 	private long id;
 	private String power;
 	

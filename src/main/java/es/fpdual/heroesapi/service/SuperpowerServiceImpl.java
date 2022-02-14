@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.fpdual.heroesapi.model.SuperpowerBean;
 import es.fpdual.heroesapi.repository.SuperpowerRepository;
 
 @Service
-public class SuperpowerRepositoryImpl implements SuperpowerService {
-	
+@Transactional
+public class SuperpowerServiceImpl implements SuperpowerService {
+
 	@Autowired
 	private SuperpowerRepository repository;
-
 
 	@Override
 	public List<SuperpowerBean> selectAll() {
@@ -26,13 +27,13 @@ public class SuperpowerRepositoryImpl implements SuperpowerService {
 	}
 
 	@Override
-	public void insert(SuperpowerBean superpower) {
-		this.repository.insert(superpower);
+	public void insert(SuperpowerBean superhero) {
+		this.repository.insert(superhero);
 	}
 
 	@Override
-	public void update(SuperpowerBean superpower) {
-		this.repository.update(superpower);
+	public void update(SuperpowerBean superhero) {
+		this.repository.update(superhero);
 	}
 
 	@Override

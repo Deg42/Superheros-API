@@ -13,7 +13,7 @@ public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 
 	@Autowired
 	private JdbcTemplate template;
-	
+
 	@Override
 	public List<SuperpowerBean> selectAll() {
 		try {
@@ -36,11 +36,10 @@ public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 
 	@Override
 	public void insert(SuperpowerBean superpower) {
-		try {
+			try {
 			this.template.update("INSERT INTO SUPERPOWERS VALUES (?, ?)", 
 					superpower.getId(), 
-					superpower.getPower());
-							
+					superpower.getPower());		
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -48,12 +47,11 @@ public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 	}
 
 	@Override
-	public void update(SuperpowerBean superpower) {
+	public void update(SuperpowerBean superpower) {		
 		try {
-			this.template.update("UPDATE SUPERPOWERS SET POWER = ? WHERE ID = ?", 
-					superpower.getId(), 
-					superpower.getPower());
-							
+			this.template.update("UPDATE SUPERPOWERS SET POWER = ? WHERE ID = ?",
+					superpower.getPower(),
+					superpower.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -61,7 +59,7 @@ public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 	}
 
 	@Override
-	public void delete(long id) {
+	public void delete(long id) {		
 		try {
 			this.template.update("DELETE FROM SUPERPOWERS WHERE ID = ?", id);
 		} catch (Exception e) {

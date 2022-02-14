@@ -15,4 +15,5 @@ public interface SuperpowerService {
 	void update(SuperpowerBean superpower);
 
 	void delete(long id);
+
 }
