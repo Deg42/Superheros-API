@@ -1,8 +1,10 @@
 package es.fpdual.heroesapi.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class SuperheroBean {
 
 	private long id;
