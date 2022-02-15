@@ -39,9 +39,8 @@ public class SuperheroServiceImpl implements SuperheroService {
 
 	@Override
 	public SuperheroBean selectById(long id) throws SuperheroException {
-		SuperheroBean superhero = this.repository.selectById(id);
-
 		try {
+			SuperheroBean superhero = this.repository.selectById(id);
 			if (superhero == null) {
 				return superhero;
 			}
