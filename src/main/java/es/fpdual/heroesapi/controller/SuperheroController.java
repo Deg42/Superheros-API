@@ -3,6 +3,8 @@ package es.fpdual.heroesapi.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,21 +24,6 @@ public class SuperheroController {
 
 	@Autowired
 	private SuperheroService service;
-	
-
-	/*
-	 * @GetMapping("/") public List<SuperheroBean> listAll() { List<SuperheroBean>
-	 * heroesList = new ArrayList<SuperheroBean>();
-	 * 
-	 * heroesList.add(new SuperheroBean(10, "Superman", "Clark Kent", null));
-	 * heroesList.add(new SuperheroBean(11, "Hulk", "Bruce Banner", null));
-	 * heroesList.add(new SuperheroBean(12, "Black Widow", "Natasha Romanoff",
-	 * null));
-	 * 
-	 * return heroesList;
-	 * 
-	 * }
-	 */
 
 	@GetMapping("/")
 	public List<SuperheroBean> listAllSuperheroes() {
@@ -44,23 +31,43 @@ public class SuperheroController {
 	}
 
 	@GetMapping("/{id}")
-	public SuperheroBean getSuperheroById(@PathVariable long id) throws SuperheroException {
-		return this.service.selectById(id);
+	public ResponseEntity<?> getSuperheroById(@PathVariable long id) {
+		try {
+			return new ResponseEntity<>(this.service.selectById(id), HttpStatus.OK);
+		} catch (SuperheroException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	@PostMapping
-	public void createSuperhero(@RequestBody SuperheroBean superhero) throws SuperheroException {
-		this.service.insert(superhero);
+	public ResponseEntity<String> createSuperhero(@RequestBody SuperheroBean superhero) {
+		try {
+			this.service.insert(superhero);
+			return new ResponseEntity<>("Superhero created", HttpStatus.OK);
+		} catch (SuperheroException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
-	
+
 	@PatchMapping
-	public void updateSuperhero(@RequestBody SuperheroBean superhero) throws SuperheroException {
-		this.service.update(superhero);
+	public ResponseEntity<String> updateSuperhero(@RequestBody SuperheroBean superhero) {
+		try {
+			this.service.update(superhero);
+			return new ResponseEntity<>("Superhero " + superhero.getName() + " updated", HttpStatus.OK);
+		} catch (SuperheroException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public void deleteSuperhero(@PathVariable long id) throws SuperheroException {
-		this.service.delete(id);
+	public ResponseEntity<String> deleteSuperhero(@PathVariable long id) {
+		try {
+			this.service.delete(id);
+			return new ResponseEntity<>("Superhero with id " + id + " deleted", HttpStatus.OK);
+		} catch (SuperheroException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

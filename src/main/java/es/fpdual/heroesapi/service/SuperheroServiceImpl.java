@@ -12,7 +12,7 @@ import es.fpdual.heroesapi.model.SuperpowerBean;
 import es.fpdual.heroesapi.repository.SuperheroRepository;
 
 @Service
-@Transactional(rollbackFor = SuperheroException.class) 
+@Transactional(rollbackFor = SuperheroException.class)
 public class SuperheroServiceImpl implements SuperheroService {
 
 	@Autowired
@@ -39,9 +39,8 @@ public class SuperheroServiceImpl implements SuperheroService {
 
 	@Override
 	public SuperheroBean selectById(long id) throws SuperheroException {
-		SuperheroBean superhero = this.repository.selectById(id);
-
 		try {
+			SuperheroBean superhero = this.repository.selectById(id);
 			if (superhero == null) {
 				return superhero;
 			}
@@ -61,19 +60,19 @@ public class SuperheroServiceImpl implements SuperheroService {
 	public void insert(SuperheroBean superhero) throws SuperheroException {
 		try {
 			SuperheroBean superheroExists = this.repository.selectById(superhero.getId());
-			
+
 			if (superheroExists != null) {
 				throw new SuperheroException("Superhero with id " + superhero.getId() + " already exists");
 			}
 		} catch (EmptyResultDataAccessException e) {
-			
+
 		}
 		this.repository.insert(superhero);
-		
+
 		if (superhero.getSuperpowers() == null || superhero.getSuperpowers().isEmpty()) {
 			throw new SuperheroException("Superhero needs at leats one superpower");
 		}
-		
+
 		this.superpowerService.insert(superhero.getId(), superhero.getSuperpowers());
 	}
 
@@ -83,16 +82,16 @@ public class SuperheroServiceImpl implements SuperheroService {
 			this.repository.selectById(superhero.getId());
 			this.repository.update(superhero);
 			this.superpowerService.delete(superhero.getId());
-			
+
 			if (superhero.getSuperpowers() == null || superhero.getSuperpowers().isEmpty()) {
 				throw new SuperheroException("Superhero needs at leats one superpower");
 			}
-						
+
 			this.superpowerService.insert(superhero.getId(), superhero.getSuperpowers());
 		} catch (EmptyResultDataAccessException e) {
 			throw new SuperheroException("Superhero with id " + superhero.getId() + " not found");
 		}
-		
+
 	}
 
 	@Override
