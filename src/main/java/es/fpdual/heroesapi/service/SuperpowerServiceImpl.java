@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.fpdual.heroesapi.model.SuperpowerBean;
 import es.fpdual.heroesapi.repository.SuperpowerRepository;
 
 @Service
-@Transactional
+@Transactional(propagation = Propagation.MANDATORY) 
 public class SuperpowerServiceImpl implements SuperpowerService {
 
 	@Autowired
@@ -29,10 +30,6 @@ public class SuperpowerServiceImpl implements SuperpowerService {
 	@Override
 	public void delete(long idHero) {
 		this.repository.delete(idHero);
-	}
-
-
-
-	
+	}	
 
 }

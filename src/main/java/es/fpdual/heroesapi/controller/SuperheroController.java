@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.fpdual.heroesapi.model.SuperheroBean;
+import es.fpdual.heroesapi.model.SuperpowerBean;
 import es.fpdual.heroesapi.service.SuperheroService;
+import es.fpdual.heroesapi.service.SuperpowerService;
 
 @RestController
 @RequestMapping("/superheros")
@@ -21,6 +23,9 @@ public class SuperheroController {
 
 	@Autowired
 	private SuperheroService service;
+	
+	@Autowired
+	private SuperpowerService powerService;
 
 	/*
 	 * @GetMapping("/") public List<SuperheroBean> listAll() { List<SuperheroBean>
@@ -39,6 +44,11 @@ public class SuperheroController {
 	@GetMapping("/")
 	public List<SuperheroBean> listAllSuperheroes() {
 		return this.service.selectAll();
+	}
+	
+	@GetMapping("/notCallable")
+	public List<SuperpowerBean> listAllSuperpowersBatman() {
+		return this.powerService.selectAll(1);
 	}
 
 	@GetMapping("/{id}")

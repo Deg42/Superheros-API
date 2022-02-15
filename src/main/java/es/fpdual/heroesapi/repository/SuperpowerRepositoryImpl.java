@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import es.fpdual.heroesapi.model.SuperpowerBean;
 
-@Repository
+@Repository()
 public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 
 	@Autowired
