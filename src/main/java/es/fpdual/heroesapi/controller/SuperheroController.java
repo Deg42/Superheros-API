@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.fpdual.heroesapi.model.SuperheroBean;
-import es.fpdual.heroesapi.model.SuperpowerBean;
+import es.fpdual.heroesapi.service.SuperheroException;
 import es.fpdual.heroesapi.service.SuperheroService;
-import es.fpdual.heroesapi.service.SuperpowerService;
 
 @RestController
 @RequestMapping("/superheros")
@@ -24,8 +23,6 @@ public class SuperheroController {
 	@Autowired
 	private SuperheroService service;
 	
-	@Autowired
-	private SuperpowerService powerService;
 
 	/*
 	 * @GetMapping("/") public List<SuperheroBean> listAll() { List<SuperheroBean>
@@ -45,29 +42,24 @@ public class SuperheroController {
 	public List<SuperheroBean> listAllSuperheroes() {
 		return this.service.selectAll();
 	}
-	
-	@GetMapping("/notCallable")
-	public List<SuperpowerBean> listAllSuperpowersBatman() {
-		return this.powerService.selectAll(1);
-	}
 
 	@GetMapping("/{id}")
-	public SuperheroBean getSuperheroById(@PathVariable long id) {
+	public SuperheroBean getSuperheroById(@PathVariable long id) throws SuperheroException {
 		return this.service.selectById(id);
 	}
 
 	@PostMapping
-	public void createSuperhero(@RequestBody SuperheroBean superhero) {
+	public void createSuperhero(@RequestBody SuperheroBean superhero) throws SuperheroException {
 		this.service.insert(superhero);
 	}
 	
 	@PatchMapping
-	public void updateSuperhero(@RequestBody SuperheroBean superhero) {
+	public void updateSuperhero(@RequestBody SuperheroBean superhero) throws SuperheroException {
 		this.service.update(superhero);
 	}
 	
 	@DeleteMapping("/{id}")
-	public void deleteSuperhero(@PathVariable long id) {
+	public void deleteSuperhero(@PathVariable long id) throws SuperheroException {
 		this.service.delete(id);
 	}
 

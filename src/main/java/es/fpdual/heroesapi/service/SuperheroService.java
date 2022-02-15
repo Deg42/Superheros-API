@@ -8,12 +8,12 @@ public interface SuperheroService {
 
 	List<SuperheroBean> selectAll();
 
-	SuperheroBean selectById(long id);
+	SuperheroBean selectById(long id) throws SuperheroException;
 
-	void insert(SuperheroBean superhero);
+	void insert(SuperheroBean superhero) throws SuperheroException;
 
-	void update(SuperheroBean superhero);
+	void update(SuperheroBean superhero) throws SuperheroException;
 
-	void delete(long id);
+	void delete(long id) throws SuperheroException;
 
 }
