@@ -18,7 +18,7 @@ public class SuperpowerRepositoryImpl implements SuperpowerRepository {
 	public List<SuperpowerBean> selectAll(long idHero) {
 		try {
 			return this.template.query("SELECT ID, POWER FROM SUPERPOWERS S "
-					+ "INNER JOIN HERO_HAS_POW HP ON S.ID = HP.ID_POW" 
+					+ "INNER JOIN HERO_HAS_POW HP ON S.ID = HP.ID_POW " 
 					+ "WHERE HP.ID_HERO = ?", 
 					new SuperpowerMapper(), idHero);
 		} catch (Exception e) {
