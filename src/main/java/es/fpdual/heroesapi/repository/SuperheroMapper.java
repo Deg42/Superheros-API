@@ -11,7 +11,6 @@ public class SuperheroMapper implements RowMapper<SuperheroBean> {
 
 	@Override
 	public SuperheroBean mapRow(ResultSet rs, int rowNum) throws SQLException {
-		
 		SuperheroBean superhero = new SuperheroBean();
 		superhero.setId(rs.getLong("ID"));
 		superhero.setName(rs.getString("NAME"));

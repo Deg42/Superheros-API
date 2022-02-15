@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.fpdual.heroesapi.model.SuperheroBean;
+import es.fpdual.heroesapi.service.ImageException;
 import es.fpdual.heroesapi.service.SuperheroException;
 import es.fpdual.heroesapi.service.SuperheroService;
 
@@ -46,6 +47,8 @@ public class SuperheroController {
 			return new ResponseEntity<>("Superhero created", HttpStatus.OK);
 		} catch (SuperheroException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (ImageException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
 		}
 	}
 
@@ -56,6 +59,8 @@ public class SuperheroController {
 			return new ResponseEntity<>("Superhero " + superhero.getName() + " updated", HttpStatus.OK);
 		} catch (SuperheroException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		} catch (ImageException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
 		}
 
 	}

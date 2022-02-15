@@ -14,5 +14,6 @@ public class SuperheroBean {
 	private String alterego;
 	private String image;
 	private List<SuperpowerBean> superpowers;
+	private List<WeaknessBean> weaknesses;
 
 }
