@@ -45,10 +45,10 @@ public class SuperheroController {
 		try {
 			this.service.insert(superhero);
 			return new ResponseEntity<>("Superhero created", HttpStatus.OK);
-		} catch (SuperheroException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		} catch (ImageException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+		} catch (SuperheroException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -57,10 +57,10 @@ public class SuperheroController {
 		try {
 			this.service.update(superhero);
 			return new ResponseEntity<>("Superhero " + superhero.getName() + " updated", HttpStatus.OK);
-		} catch (SuperheroException e) {
-			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		} catch (ImageException e) {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
+		} catch (SuperheroException e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 
 	}

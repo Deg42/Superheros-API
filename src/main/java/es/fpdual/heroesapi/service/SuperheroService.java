@@ -10,9 +10,9 @@ public interface SuperheroService {
 
 	SuperheroBean selectById(long id) throws SuperheroException;
 
-	void insert(SuperheroBean superhero) throws SuperheroException, ImageException;
+	void insert(SuperheroBean superhero) throws SuperheroException;
 
-	void update(SuperheroBean superhero) throws SuperheroException, ImageException;
+	void update(SuperheroBean superhero) throws SuperheroException;
 
 	void delete(long id) throws SuperheroException;
 

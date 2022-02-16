@@ -69,7 +69,7 @@ public class SuperheroServiceImpl implements SuperheroService {
 	}
 
 	@Override
-	public void insert(SuperheroBean superhero) throws SuperheroException, ImageException {
+	public void insert(SuperheroBean superhero) throws SuperheroException {
 		try {
 			SuperheroBean superheroExists = this.repository.selectById(superhero.getId());
 
@@ -78,7 +78,7 @@ public class SuperheroServiceImpl implements SuperheroService {
 			}
 
 		} catch (EmptyResultDataAccessException e) {
-			e.printStackTrace();
+		;
 		}
 
 		this.repository.insert(superhero);
@@ -89,16 +89,17 @@ public class SuperheroServiceImpl implements SuperheroService {
 		if (superhero.getWeaknesses() == null || superhero.getWeaknesses().isEmpty()) {
 			throw new SuperheroException("ERROR: Superhero needs at leats one weakness");
 		}
-		if (superhero.getImage() == null || "".equals(superhero.getImage())) {
-			throw new ImageException("INFO: Superhero created without image");
-		}
 
 		this.superpowerService.insert(superhero.getId(), superhero.getSuperpowers());
 		this.weaknessService.insert(superhero.getId(), superhero.getWeaknesses());
+		
+		if (superhero.getImage() == null || "".equals(superhero.getImage())) {
+			throw new ImageException("INFO: Superhero created without image");
+		}
 	}
 
 	@Override
-	public void update(SuperheroBean superhero) throws SuperheroException, ImageException{
+	public void update(SuperheroBean superhero) throws SuperheroException {
 		try {
 			this.repository.selectById(superhero.getId());
 			this.repository.update(superhero);
@@ -111,12 +112,14 @@ public class SuperheroServiceImpl implements SuperheroService {
 			if (superhero.getWeaknesses() == null || superhero.getWeaknesses().isEmpty()) {
 				throw new SuperheroException("ERROR: Superhero needs at least one weakness");
 			}
+			
+			this.superpowerService.insert(superhero.getId(), superhero.getSuperpowers());
+			this.weaknessService.insert(superhero.getId(), superhero.getWeaknesses());
+			
 			if (superhero.getImage() == null || "".equals(superhero.getImage())) {
 				throw new ImageException("INFO: Superhero updated without image");
 			}
 			
-			this.superpowerService.insert(superhero.getId(), superhero.getSuperpowers());
-			this.weaknessService.insert(superhero.getId(), superhero.getWeaknesses());
 		} catch (EmptyResultDataAccessException e) {
 			throw new SuperheroException("ERROR: Superhero with id " + superhero.getId() + " not found");
 		}
